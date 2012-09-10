@@ -1,0 +1,20 @@
+server_name       <%= server_name || "dev.dcloud.org" %>;
+root              <%= app_root %>;
+passenger_enabled on;
+rails_env         <%= rails_env %>;
+
+location = /pixel.gif {
+  proxy_pass http://127.0.0.1:9187;
+}
+
+location ~ ^/(assets|images|flash)/ {
+  passenger_enabled on;
+  expires max;
+}
+
+location = /nginx_status {
+  stub_status on;
+  access_log off;
+  allow 127.0.0.1;
+  deny all;
+}

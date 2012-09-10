@@ -1,0 +1,1 @@
+# verify that cloudcrowd database is accessible and has schema loaded.
