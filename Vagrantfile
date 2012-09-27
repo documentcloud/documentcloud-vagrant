@@ -5,9 +5,9 @@ Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
-  
+
   username      = "ubuntu"
-  local_app_dir = "/Users/ted/dc/documentcloud/"
+  local_app_dir = "/Users/nas/code/documentcloud/"
   app_root      = "/home/#{username}/documentcloud"
   rails_env     = "development"
 
