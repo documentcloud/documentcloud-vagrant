@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 require 'fileutils'
 require 'erb'
 =begin
@@ -32,3 +34,4 @@ File.open "/usr/local/nginx/conf/documentcloud.conf", "w" do |dc_conf|
   dc_conf_template = File.open(File.join(here, "erb", "documentcloud.conf.erb")).read
   dc_conf.puts ERB.new(dc_conf_template).result(binding)
 end
+
