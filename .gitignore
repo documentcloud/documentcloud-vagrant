@@ -2,3 +2,5 @@
 *.box
 .vagrant
 .bashrc
+scripts/*.output
+scripts/*.fail

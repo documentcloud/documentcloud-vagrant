@@ -1,0 +1,6 @@
+
+grep -q '^UseDNS no' /etc/ssh/sshd_config || echo 'UseDNS no' >> /etc/ssh/sshd_config
+
+reload -v ssh
+
+

@@ -1,0 +1,23 @@
+
+
+sudo service nginx start
+
+sudo service postgresql start
+
+cd /home/$USERNAME/documentcloud
+
+if [ $(pgrep -f solr) ]; then
+   rake sunspot:solr:stop
+fi
+rake sunspot:solr:start 
+
+if [ $(pgrep -f  'thin.*cloud-crowd-server') ]; then
+   rake crowd:server:stop
+fi
+rake crowd:server:start
+
+
+if [ $(pgrep -f  'thin.*cloud-crowd-node') ]; then
+   rake crowd:node:stop
+fi
+rake crowd:node:start

@@ -1,0 +1,9 @@
+
+apt-get update -q
+
+# Set up system dependencies
+BASICS='git build-essential postgresql libpq-dev git sqlite3 libsqlite3-dev libpcre3-dev lzop libxml2-dev libxslt-dev libcurl4-gnutls-dev libitext-java ruby1.8 rubygems'
+echo $BASICS | xargs apt-get install -q -y
+
+DOCSPLIT_DEPS='graphicsmagick pdftk xpdf poppler-utils libreoffice libreoffice-java-common tesseract-ocr ghostscript'
+echo $DOCSPLIT_DEPS | xargs apt-get install -q -y
