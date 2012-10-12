@@ -1,0 +1,8 @@
+
+cd /home/$USERNAME
+
+# approve github ssh host key
+grep -q github .ssh/known_hosts 2>/dev/null || ssh-keyscan -t rsa github.com > .ssh/known_hosts
+
+
+
