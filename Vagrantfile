@@ -5,9 +5,11 @@ Vagrant::Config.run do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
-  
+
+  # This assumes the following directory layout:
   username      = "ubuntu"
-  local_app_dir = "/Users/ted/dc/documentcloud/"
+  local_app_dir = "#{ File.dirname(__FILE__) }/../documentcloud/"
+
   app_root      = "/home/#{username}/documentcloud"
   rails_env     = "development"
 
@@ -17,7 +19,7 @@ Vagrant::Config.run do |config|
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  # config.vm.box_url = "http://domain.com/path/to/above.box"
+  config.vm.box_url = "http://s3.documentcloud.org/documentcloud.2012.10.15.box"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -43,7 +45,7 @@ Vagrant::Config.run do |config|
   script = <<-SHELL
     export USERNAME=#{username};
     export RAILS_ENV=#{rails_env};
-    sh /vagrant/scripts/base.sh;
+    ruby /vagrant/scripts/runner 
 SHELL
 
   config.vm.provision :shell, :inline => script

@@ -1,0 +1,16 @@
+
+cd /home/$USERNAME/documentcloud
+
+# Install gems
+git branch | grep -q bundler
+if [ "$?"=="0" ]; then
+    git checkout bundler
+else
+    git checkout --track -b bundler origin/bundler
+fi
+
+git pull
+sudo gem install bundler --no-ri --no-rdoc
+sudo bundle install
+
+git checkout master
