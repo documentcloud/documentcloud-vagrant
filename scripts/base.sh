@@ -6,7 +6,7 @@ test $USERNAME  || { echo "USERNAME has to be set" >&2; exit 1; }
 test $RAILS_ENV || { echo "USERNAME has to be set" >&2; exit 1; }
 
 # Set up system dependencies
-BASICS='git build-essential postgresql libpq-dev git sqlite3 libsqlite3-dev libpcre3-dev lzop libxml2-dev libxslt-dev libcurl4-gnutls-dev libitext-java ruby1.8 rubygems'
+BASICS='git build-essential postgresql postgresql-contrib libpq-dev git sqlite3 libsqlite3-dev libpcre3-dev lzop libxml2-dev libxslt-dev libcurl4-gnutls-dev libitext-java ruby ruby-dev'
 echo $BASICS | xargs apt-get install -y
 
 DOCSPLIT_DEPS='graphicsmagick pdftk xpdf poppler-utils libreoffice libreoffice-java-common tesseract-ocr ghostscript'
@@ -21,22 +21,22 @@ grep -q github .ssh/known_hosts 2>/dev/null || ssh-keyscan -t rsa github.com > .
 
 # Install gems
 cd documentcloud
-git checkout --track -b bundler origin/bundler
-git pull
+#git checkout --track -b bundler origin/bundler
+#git pull
 gem install bundler --no-ri --no-rdoc
 bundle install
-git checkout master
-git pull
+#git checkout master
+#git pull
 
 # Ensure that the secrets directory exists
-test -e secrets || { cp -r config/server/secrets ./secrets; }
+test -e secrets || { cp -r config/server/files/secrets ./secrets; }
 
 # disable ssh dns to avoid long pause before login
 grep -q '^UseDNS no' /etc/ssh/sshd_config || echo 'UseDNS no' >> /etc/ssh/sshd_config
 /etc/init.d/ssh reload
 
 # replace annoying motd with new one
-rm /etc/motd
+rm -f /etc/motd
 cat >/etc/motd <<'EOF'
 
 ______                                      _   _____ _                 _
